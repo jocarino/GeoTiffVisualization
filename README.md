@@ -24,18 +24,25 @@ pip install -r requirements.txt
 
 ```
 
+__Note:__ I also needed to:
+* Add c:\gdal\bin\gdal\apps to my path (in environment variables)
+* Copy the following dlls from c:\gdal\bin:
+  * sqlite3.dll
+  * libcurl.dll
+* A better solution may be to run gdal\apps\gdal_translate...
+
 ## Generate tile layers
 
 Create a .vrt output file from the current tiff
 
 ```powershell
-gdal_translate -of VRT -ot Byte -scale .\input.tif output.vrt
+gdal_translate -of VRT -ot Byte -scale input\feature.tif output\feature.vrt
 ```
 
 Generate the tiles from output.vrt
 
 ```powershell
-python .\.venv\Scripts\gdal2tiles.py .\output.vrt
+python venv\Scripts\gdal2tiles.py output\feature.vrt
 ```
 
 ## Add the layers to the leaflet file
